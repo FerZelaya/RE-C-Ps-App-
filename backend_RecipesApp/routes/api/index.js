@@ -22,9 +22,12 @@ passport.use(
 var secRoutes = require('./sec')
 var recipesRoutes = require('./recipes')
 
-
+//public route
 router.use("/sec", secRoutes)
-router.use("/recipes", recipesRoutes)
+
+//private route
+const jwtAuthMiddleware = passport.authenticate('jwt' , {session:false})
+router.use("/recipes", jwtAuthMiddleware, recipesRoutes)
 
 
 module.exports = router;
