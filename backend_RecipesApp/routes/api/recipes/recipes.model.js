@@ -30,6 +30,25 @@ module.exports = class {
         }
     }
 
+
+    //Search one recipe
+    static async getOneRecipe(recipeid) {
+        try {
+          let filter = { "_id": new ObjectId(recipeid)};
+          const result = await recipesColl.findOne(filter);
+          return result;
+        } catch (error) {
+          console.log(error);
+          return err;
+        }
+    }
+
+
+    //Show user posted recipes
+    
+
+
+
     //Post own recipe
     static async postRecipe(title, ingredients, preparation, servingSize, calories){
         try {
@@ -47,6 +66,19 @@ module.exports = class {
             return error
         }
 
+    }
+
+
+    //Delete recipe
+    static async deleteRecipe(recipeid){
+        try{
+            let filter = {"_id": new ObjectId(recipeid)}
+            const result = await recipesColl.deleteOne(filter)
+            return result
+        }catch(error){
+            console.log(error);
+            return error
+        }
     }
 
 

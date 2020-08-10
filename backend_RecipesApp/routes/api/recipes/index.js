@@ -18,6 +18,18 @@ router.get('/showAll', async(req,res)=>{
     }
 })
 
+//show one recipe
+router.get('/info/:recipeid', async (req, res)=>{
+    try{
+        let {recipeid} = req.params;
+        let result = await model.getOneRecipe(recipeid);
+        res.status(200).json(result);
+    }catch(err){
+      console.log(err);
+      res.status(500).json({ "ERROR": "Search failed" });
+    }
+})
+
 //Post own recipe
 router.post('/postRecipe', async(req,res)=>{
     try {
@@ -27,6 +39,17 @@ router.post('/postRecipe', async(req,res)=>{
     }catch(error){
         console.log(error);
         res.status(500).json({"ERROR":"Unable to post your recipe"})
+    }
+})
+
+router.delete('/deleteRecipe/:recipeid', async(req,res)=>{
+    try{
+        const {recipeid} = req.params
+        const result = await model.deleteRecipe(recipeid)
+        res.status(200).json(result)
+    }catch(error){
+        console.log(error);
+        res.status(500).json({"ERROR":"Unable to delete your recipe"})
     }
 })
 
