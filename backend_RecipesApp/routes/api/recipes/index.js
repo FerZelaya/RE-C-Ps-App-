@@ -30,6 +30,18 @@ router.get('/info/:recipeid', async (req, res)=>{
     }
 })
 
+//Show user recipes
+router.get('/showUserRecipes', async(req,res)=>{
+    try{
+        var user = req.user._id;
+        let recipes = await model.showUserAllRecipes(user)
+        res.status(200).json(recipes)
+    }catch(error){
+        console.log(error);
+        res.status(500).json({"ERROR":"Unable to show all recipes"})
+    }
+})
+
 //Post own recipe
 router.post('/postRecipe', async(req,res)=>{
     try {

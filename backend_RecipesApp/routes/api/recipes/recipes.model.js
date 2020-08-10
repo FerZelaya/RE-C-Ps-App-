@@ -45,7 +45,20 @@ module.exports = class {
 
 
     //Show user posted recipes
-    
+    static async showUserAllRecipes(user){
+        try{
+            if(recipesColl){
+                let recipes = await pedidosColl.find({
+                    "user":ObjectId(user)
+                  });
+                return recipes.toArray()
+            }
+            return[]
+        }catch(error){
+            console.log(error);
+            return errorS
+        }
+    }
 
 
 
