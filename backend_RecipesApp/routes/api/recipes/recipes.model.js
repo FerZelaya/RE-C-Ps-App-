@@ -63,14 +63,15 @@ module.exports = class {
 
 
     //Post own recipe
-    static async postRecipe(title, ingredients, preparation, servingSize, calories){
+    static async postRecipe(title, ingredients, preparation, servingSize, calories, recipeImage){
         try {
             let newRecipe = {
                 title:title,
                 ingredients:ingredients,
                 preparation:preparation,
                 servingSize:servingSize,
-                calories:calories
+                calories:calories,
+                recipeImage:recipeImage
             }
             let result = await recipesColl.insertOne(newRecipe)
             return result            
