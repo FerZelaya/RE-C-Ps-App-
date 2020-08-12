@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../Header';
 import Footer from '../Footer';
-//import './page.css';
+import './page.css';
 
 
 export default ({showHeader, showFooter , title, children, auth})=>{
