@@ -20,3 +20,71 @@ export const setJWT = (jwt)=>{
 
 export const naxios = publicaxios
 export const paxios = privateaxios
+
+
+//Auth Interceptor
+export const AuthInterceptor = (logouthandler) => {
+    privateaxios.interceptors.response.use(
+        (response)=>{
+            return response
+        },
+        (error)=>{
+            console.log(error);
+            if(error.response){
+                switch(error.response.status){
+                    case 401:
+                        logouthandler()
+                        break
+                    default:
+                        console.log(error);
+                }
+            }else{
+                console.log(error);
+            }
+            return Promise.reject(error)
+        }
+    )
+}
+
+
+const localStorageAvailable = (
+    ()=>{
+        let s="s"
+        try{
+            localStorage.setItem(s,s)
+            localStorage.removeItem(s)
+            return true
+        }catch(error){
+            return false
+        }
+    }
+)()
+
+
+//Set jwt to local storage
+export const getLocalStorage = (key) => {
+    if(localStorageAvailable){
+        return localStorage.getItem(key)
+
+    }else{
+        return null
+    }
+}
+
+export const setLocalStorage = (key, value) => {
+    if(localStorageAvailable){
+        localStorage.setItem(key, value)
+        return true
+    }else{
+        return false
+    }
+}
+
+export const removeLocalStorage = (key) => {
+    if(localStorageAvailable){
+        localStorage.removeItem(key)
+        return true
+    }else{
+        return false
+    }
+}

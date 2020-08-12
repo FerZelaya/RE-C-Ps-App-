@@ -7,6 +7,18 @@ import {Grid , Card, Typography, Button, CardActions, CardActionArea, CardConten
 
 
 export default class extends Component {
+    constructor(){
+      super()
+      
+      this.state = {
+
+      }
+
+    }
+
+
+
+
     render(){
       return (
         <Page
