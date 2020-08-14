@@ -23,6 +23,7 @@ footer nav ul {
 
 footer nav ul li {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     width:100%;
