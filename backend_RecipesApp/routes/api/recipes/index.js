@@ -1,6 +1,7 @@
 var express = require('express')
 var router = express.Router()
 var multer = require('multer')
+const path = require('path')
 const model = require('./recipes.model')
 
 //Image storage configurations
@@ -9,7 +10,7 @@ const storage = multer.diskStorage({
         cb(null, './uploads/')
     },
     filename: function(req,file,cb){
-        cb(null, file.originalname)
+        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
     }
 })
 
@@ -76,7 +77,7 @@ router.post('/postRecipe', upload.single('recipeImage'), async(req,res)=>{
     try {
         console.log(req.file);
         var {title, ingredients, preparation, servingSize, calories} = req.body
-        var recipeImage = req.file.path
+        var recipeImage = `uploads/${req.file.filename}`
         var result = await model.postRecipe(title, ingredients, preparation, servingSize, calories, recipeImage)        
         res.status(200).json(result)
     }catch(error){

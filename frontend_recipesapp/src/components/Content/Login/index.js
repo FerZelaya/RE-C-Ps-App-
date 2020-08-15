@@ -32,7 +32,7 @@ export default class extends Component {
         })
     }
 
-    async onClickButton(e){
+    async onClickButton(){
         try{
             let userData = await signIn(this.state.email, this.state.password)
             const {jwt}  = userData
@@ -109,11 +109,8 @@ export default class extends Component {
                             </Button>
 
                             <Grid container justify="center">
-                                <Grid item xs>
-                                    <Link href="/recuperacion" variant="body2">Forgot Password?</Link>
-                                </Grid>
-                                <Grid item xs>
-                                    <Link href="/signup" variant="body2">Create an account</Link>
+                                <Grid item >
+                                    <Typography variant="h6" ><Link href="/signup">Create an account!</Link></Typography>
                                 </Grid>
                             </Grid>
 

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Switch, BrowserRouter as Router} from 'react-router-dom';
 import PRoute from './components/utilities/privateroutes'
 import NRoute from './components/utilities/normalroutes'
-import {setJWT, AuthInterceptor, getLocalStorage, setLocalStorage, removeLocalStorage} from './components/utilities/axios'
+import {setJWT, getLocalStorage, setLocalStorage, removeLocalStorage} from './components/utilities/axios'
 import './App.css';
 
 import {CircularProgress, Grid} from '@material-ui/core'
@@ -67,13 +67,14 @@ export default class extends Component{
           }
         )
     } else {
-      this.state = {
+      this.setState({
         ...this.state,
         user:"",
         jwt:"",
         isLogged:false
-      }
-      setJWT('')
+      },
+        setJWT('')
+      )
     }
     
   }
