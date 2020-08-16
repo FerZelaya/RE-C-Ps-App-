@@ -10,6 +10,8 @@ import {CircularProgress, Grid} from '@material-ui/core'
 import Home from './components/Content/Home/index'
 import Login from './components/Content/Login/index'
 import SignOut from './components/Content/SignOut/index'
+import Profile from './components/Content/Profile/index'
+import PostRecipe from './components/Content/Profile/postRecipe'
 
 export default class extends Component{
   constructor(){
@@ -103,6 +105,8 @@ export default class extends Component{
           <NRoute path="/login" component={Login} exact auth={auth}/>
           <PRoute path="/signout" component={SignOut} exact auth={auth}/>
           <PRoute path="/" component={Home} exact auth={auth}/>
+          <PRoute path="/profile" component={Profile} exact auth={auth}/>
+          <PRoute path="/postRecipe" component={PostRecipe} exact auth={auth}/>
         </Switch>
       </Router>
     )

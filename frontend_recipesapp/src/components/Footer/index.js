@@ -11,7 +11,7 @@ export default ()=>{
       <nav>
         <ul>
           <li><NavLink to="/" ><FiHome size="2em"/></NavLink></li>
-          <li><NavLink to="/perfil"><FiUser size="2em"/></NavLink></li>
+          <li><NavLink to="/profile"><FiUser size="2em"/></NavLink></li>
           <li><NavLink to="/signout"><FiLogOut size="2em"/></NavLink></li>
         </ul>
       </nav>
