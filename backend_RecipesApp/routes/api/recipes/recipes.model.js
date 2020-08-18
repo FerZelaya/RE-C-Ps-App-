@@ -48,7 +48,7 @@ module.exports = class {
     static async showUserAllRecipes(user){
         try{
             if(recipesColl){
-                let recipes = await pedidosColl.find({
+                let recipes = await recipesColl.find({
                     "user":ObjectId(user)
                   });
                 return recipes.toArray()
@@ -63,7 +63,7 @@ module.exports = class {
 
 
     //Post own recipe
-    static async postRecipe(title, ingredients, preparation, servingSize, calories, recipeImage){
+    static async postRecipe(title, ingredients, preparation, servingSize, calories, recipeImage, user){
         try {
             let newRecipe = {
                 title:title,
@@ -71,7 +71,8 @@ module.exports = class {
                 preparation:preparation,
                 servingSize:servingSize,
                 calories:calories,
-                recipeImage:recipeImage
+                recipeImage:recipeImage,
+                user:ObjectId(user)
             }
             let result = await recipesColl.insertOne(newRecipe)
             return result            

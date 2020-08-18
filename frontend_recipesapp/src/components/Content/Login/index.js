@@ -32,7 +32,8 @@ export default class extends Component {
         })
     }
 
-    async onClickButton(){
+    async onClickButton(e){
+        e.preventDefault()
         try{
             let userData = await signIn(this.state.email, this.state.password)
             const {jwt}  = userData

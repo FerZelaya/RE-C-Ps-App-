@@ -13,14 +13,19 @@ privateaxios.defaults.headers.common['cache-control'] = "no-cache"
 privateaxios.defaults.headers.post['Content-Type'] = "no-cache"
 privateaxios.defaults.headers.put['Content-Type'] = "no-cache"
 
+const privatePostAxios = axios.create()
+
+privatePostAxios.defaults.headers.post['Content-Type'] = "multipart/form-data"
+
 //Set json web token to axios private instance
 export const setJWT = (jwt)=>{
     privateaxios.defaults.headers.common["Authorization"] = `Bearer ${jwt}`
+    privatePostAxios.defaults.headers.common["Authorization"] = `Bearer ${jwt}`
 }
 
 export const naxios = publicaxios
 export const paxios = privateaxios
-
+export const ppaxios = privatePostAxios
 
 //Auth Interceptor
 export const AuthInterceptor = (logouthandler) => {

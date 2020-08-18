@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Switch, BrowserRouter as Router} from 'react-router-dom';
+import {Switch, BrowserRouter as Router, Redirect} from 'react-router-dom';
 import PRoute from './components/utilities/privateroutes'
 import NRoute from './components/utilities/normalroutes'
 import {setJWT, getLocalStorage, setLocalStorage, removeLocalStorage} from './components/utilities/axios'
@@ -12,6 +12,7 @@ import Login from './components/Content/Login/index'
 import SignOut from './components/Content/SignOut/index'
 import Profile from './components/Content/Profile/index'
 import PostRecipe from './components/Content/Profile/postRecipe'
+import RecipeInfo from './components/Content/RecipeInfo/index'
 
 export default class extends Component{
   constructor(){
@@ -107,6 +108,7 @@ export default class extends Component{
           <PRoute path="/" component={Home} exact auth={auth}/>
           <PRoute path="/profile" component={Profile} exact auth={auth}/>
           <PRoute path="/postRecipe" component={PostRecipe} exact auth={auth}/>
+          <PRoute path="/recipeinfo/:recipeid" component={RecipeInfo} exact auth={auth}/>
         </Switch>
       </Router>
     )

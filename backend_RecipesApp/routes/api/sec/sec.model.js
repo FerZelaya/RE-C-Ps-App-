@@ -23,6 +23,20 @@ module.exports = class {
         }
     }
 
+    //User Info
+    static async userInfo(userID){
+        try{
+            if(usersColl){
+                let user = await usersColl.findOne(userID)
+                return user.toArray()
+            }
+            return[]
+        }catch(error){
+            console.log(error);
+            return errorS
+        }
+    }
+
     //Sign Up
     static async signUp(data){
         const {name, email, password } = data

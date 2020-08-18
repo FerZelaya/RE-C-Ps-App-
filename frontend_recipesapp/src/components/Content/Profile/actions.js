@@ -1,10 +1,10 @@
-import {paxios} from '../../utilities/axios' 
+import {ppaxios, paxios} from '../../utilities/axios' 
 
 
 export const showAll = async (email, password) => {
     try{
         const {data} = await paxios.get(
-            "/api/recipes/showAll"
+            "/api/recipes/showUserRecipes"
         )
         return data
     }catch(error){
@@ -12,18 +12,12 @@ export const showAll = async (email, password) => {
     }
 }
 
-export const postNew = async (title, ingredients, preparation, servingSize, calories, recipeImage)=>{
+export const postNew = async (recipeFormData)=>{
+    
     try {
-        const {data} = await paxios.post(
+        const {data} = await ppaxios.post(
             "/api/recipes/postRecipe",
-            {
-                title:title,
-                ingredients:ingredients,
-                preparation:preparation,
-                servingSize:servingSize,
-                calories:calories,
-                recipeImage:recipeImage
-            }
+            recipeFormData
         )
         return data
     } catch (error) {

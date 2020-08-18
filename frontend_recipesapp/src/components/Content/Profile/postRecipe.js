@@ -1,13 +1,17 @@
-import React, { Component } from 'react'
+import React, { Component} from 'react'
 import Page from '../../Page';
 import {postNew} from './actions'
 import './profile.css'
 
 import {Grid , TextField, Typography, Button, Container } from '@material-ui/core'
+var FormData = require('form-data');
+
 
 export default class extends Component{
+    
     constructor(){
         super()
+        
         this.state = {
             title:'',
             ingredients:'',
@@ -17,6 +21,7 @@ export default class extends Component{
             recipeImage:null
         }
 
+        
         this.onTextChange = this.onTextChange.bind(this)
         this.onClickButton = this.onClickButton.bind(this)
         this.onFileChange = this.onFileChange.bind(this)
@@ -28,20 +33,26 @@ export default class extends Component{
             [name]:value
         })
     }
+    
+    async onClickButton(e){
+        e.preventDefault()
 
-    async onClickButton(){
-        const recipe = new FormData()
-        recipe.append('recipeImage', this.state.recipeImage, this.state.recipeImage.name)
+        let recipeImage = this.state.recipeImage
+
+        var recipeFormData = new FormData()
+        recipeFormData.append("title", this.state.title)
+        recipeFormData.append("ingredients", this.state.ingredients)
+        recipeFormData.append("preparation", this.state.preparation)
+        recipeFormData.append("servingSize", this.state.servingSize)
+        recipeFormData.append("calories", this.state.calories)
+        recipeFormData.append("recipeImage", recipeImage)
+        
         try {
             let recipeData = await postNew(
-                this.state.title,
-                this.state.ingredients,
-                this.state.preparation,
-                this.state.servingSize,
-                this.state.calories,
-                recipe
+                recipeFormData
             )
             alert("New recipe added successfully!")
+            console.log(recipeData);
             window.location.reload()
         } catch (error) {
             alert("ERROR: Unable to post new recipe!")
@@ -52,11 +63,13 @@ export default class extends Component{
     onFileChange = event =>{
         this.setState({
             recipeImage: event.target.files[0]
+            
         })
         
     }
 
     render(){
+        
         return(
             <Page
             showHeader={true}
@@ -68,7 +81,7 @@ export default class extends Component{
 
                         <Typography variant="h4">New Recipe</Typography>
 
-                        <form className="loginForm">
+                        <form className="loginForm" onSubmit={this.onClickButton}>
 
                             <Grid item xs={12}>
                                 <TextField
@@ -154,15 +167,7 @@ export default class extends Component{
 
                             <Grid item xs={12} >
                                 <Typography variant="h5">Image:</Typography>
-                                <TextField
-                                    variant="filled"
-                                    margin="normal"
-                                    required
-                                    fullWidth
-                                    type="file"
-                                    placeholder="Image"
-                                    onChange={this.onFileChange}
-                                />
+                                <input type="file" name="recipeImage" onChange={this.onFileChange}/>
                             </Grid>
 
                             <Button
@@ -170,7 +175,6 @@ export default class extends Component{
                                 fullWidth
                                 variant="contained"
                                 color="primary"
-                                onClick={this.onClickButton}
                             >
                                 Post
                             </Button>

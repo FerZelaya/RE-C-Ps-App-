@@ -4,31 +4,6 @@ var multer = require('multer')
 const path = require('path')
 const model = require('./recipes.model')
 
-//Image storage configurations
-const storage = multer.diskStorage({
-    destination: function(req,file,cb){
-        cb(null, './uploads/')
-    },
-    filename: function(req,file,cb){
-        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
-    }
-})
-
-const fileFilter = (req,file,cb) => {
-    if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpg'){
-        cb(null, true)        
-    } else {
-        cb(null, false)
-    }
-}
-
-const upload = multer({
-    storage:storage, 
-    limits: {
-        fileSize: 1024 * 1024 * 5
-    },
-    fileFilter: fileFilter
-})
 
 
 //Initialize model
@@ -72,13 +47,42 @@ router.get('/showUserRecipes', async(req,res)=>{
     }
 })
 
+//Image storage configurations
+const storage = multer.diskStorage({
+    destination: function(req,file,cb){
+        cb(null, './uploads/')
+    },
+    filename: function(req,file,cb){
+        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname))
+    }
+})
+
+const fileFilter = (req,file,cb) => {
+    if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpg'){
+        cb(null, true)        
+    } else {
+        cb(null, false)
+    }
+}
+
+const upload = multer({
+    storage:storage, 
+    limits: {
+        fileSize: 1024 * 1024 * 5
+    },
+    fileFilter: fileFilter
+})
+
+
 //Post own recipe
 router.post('/postRecipe', upload.single('recipeImage'), async(req,res)=>{
     try {
         console.log(req.file);
+        console.log(req.body);
         var {title, ingredients, preparation, servingSize, calories} = req.body
         var recipeImage = `uploads/${req.file.filename}`
-        var result = await model.postRecipe(title, ingredients, preparation, servingSize, calories, recipeImage)        
+        var user = req.user._id
+        var result = await model.postRecipe(title, ingredients, preparation, servingSize, calories, recipeImage, user)        
         res.status(200).json(result)
     }catch(error){
         console.log(error);
