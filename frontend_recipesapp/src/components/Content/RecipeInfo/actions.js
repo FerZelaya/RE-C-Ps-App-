@@ -11,3 +11,14 @@ export const info = async (recipeid) => {
         throw(error)
     }
 }
+
+export const userinfo = async (userid) => {
+    try {
+        const {data} = await paxios.get(
+            `/api/sec/userInfo/${userid}`
+        )
+        return data
+    } catch (error) {
+        throw(error)
+    }
+}

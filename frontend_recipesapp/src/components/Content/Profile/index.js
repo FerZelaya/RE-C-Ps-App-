@@ -4,7 +4,7 @@ import './profile.css'
 
 import {showAll} from './actions'
 
-import {Grid , Card, Typography, Button, CardActions, CardActionArea, CardContent, CardMedia} from '@material-ui/core'
+import {Grid , Card, Typography, Button, CardActions, CardActionArea, CardContent, CardMedia, Link} from '@material-ui/core'
 
 
 export default class extends Component {
@@ -49,7 +49,11 @@ export default class extends Component {
                   </CardContent>
                 </CardActionArea>
                 <CardActions >
-                  <Button variant='contained' size="large" color="primary">More information</Button>
+                  <Button variant='contained' size="large" color="primary">
+                      <Link color="textPrimary" href={`/recipeinfo/${item._id}`}>
+                        More information
+                      </Link>
+                  </Button>
                 </CardActions>
               </Card>
             </Grid>

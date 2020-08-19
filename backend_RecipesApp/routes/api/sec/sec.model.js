@@ -24,13 +24,11 @@ module.exports = class {
     }
 
     //User Info
-    static async userInfo(userID){
+    static async userInfo(userid){
         try{
-            if(usersColl){
-                let user = await usersColl.findOne(userID)
-                return user.toArray()
-            }
-            return[]
+            let filter = { "_id": new ObjectId(userid)};
+            const result = await usersColl.findOne(filter);
+            return result;
         }catch(error){
             console.log(error);
             return errorS

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Switch, BrowserRouter as Router, Redirect} from 'react-router-dom';
+import {Switch, BrowserRouter as Router} from 'react-router-dom';
 import PRoute from './components/utilities/privateroutes'
 import NRoute from './components/utilities/normalroutes'
 import {setJWT, getLocalStorage, setLocalStorage, removeLocalStorage} from './components/utilities/axios'

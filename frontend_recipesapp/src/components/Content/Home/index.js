@@ -49,7 +49,7 @@ export default class extends Component {
                 </CardActionArea>
                 <CardActions >
                   <Button variant='contained' size="large" color="primary">
-                    <Link color="secondary" href={`/recipeinfo/${item._id}`}>
+                    <Link color="textPrimary" href={`/recipeinfo/${item._id}`}>
                       More information
                     </Link>
                   </Button>

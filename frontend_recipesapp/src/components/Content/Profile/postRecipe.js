@@ -1,4 +1,4 @@
-import React, { Component} from 'react'
+import React, { Component, Redirect} from 'react'
 import Page from '../../Page';
 import {postNew} from './actions'
 import './profile.css'
@@ -51,8 +51,9 @@ export default class extends Component{
             let recipeData = await postNew(
                 recipeFormData
             )
+            
             alert("New recipe added successfully!")
-            console.log(recipeData);
+            
             window.location.reload()
         } catch (error) {
             alert("ERROR: Unable to post new recipe!")
@@ -69,6 +70,7 @@ export default class extends Component{
     }
 
     render(){
+        
         
         return(
             <Page
