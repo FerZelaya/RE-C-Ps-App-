@@ -1,4 +1,4 @@
-import React, { Component, Redirect} from 'react'
+import React, { Component} from 'react'
 import Page from '../../Page';
 import {postNew} from './actions'
 import './profile.css'
@@ -48,10 +48,10 @@ export default class extends Component{
         recipeFormData.append("recipeImage", recipeImage)
         
         try {
-            let recipeData = await postNew(
+            const recipeData = await postNew(
                 recipeFormData
             )
-            
+            console.log(recipeData);
             alert("New recipe added successfully!")
             
             window.location.reload()

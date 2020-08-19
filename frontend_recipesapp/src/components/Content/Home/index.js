@@ -19,7 +19,6 @@ export default class extends Component {
      async componentDidMount(){
         try {
           let result = await showAll()
-          console.log(result);
           this.setState({
             recipes:result
           })

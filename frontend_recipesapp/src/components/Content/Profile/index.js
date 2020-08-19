@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import Page from '../../Page';
 import './profile.css'
 
-import {showAll} from './actions'
+import {showAlluser, deleteOne} from './actions'
 
-import {Grid , Card, Typography, Button, CardActions, CardActionArea, CardContent, CardMedia, Link} from '@material-ui/core'
+import {Grid , Card, Typography, Button, CardActions, CardActionArea, CardContent, CardMedia, Link, IconButton} from '@material-ui/core'
+import DeleteIcon from '@material-ui/icons/Delete'
 
 
 export default class extends Component {
@@ -12,15 +13,16 @@ export default class extends Component {
       super()
       
       this.state = {
-        recipes:[]
+        recipes:[],
+        recipeid:''
       }
 
+      this.deleteButtonPressed = this.deleteButtonPressed.bind(this)
     }
 
      async componentDidMount(){
         try {
-          let result = await showAll()
-          console.log(result);
+          let result = await showAlluser()
           this.setState({
             recipes:result
           })
@@ -29,10 +31,21 @@ export default class extends Component {
         }
      }
 
+     async deleteButtonPressed(recipeID){
+       try {
+         let result = await deleteOne(recipeID)
+         console.log(result);
+         window.location.reload()
+       } catch (error) {
+         console.log(error);
+       }
+     }
+
 
 
     render(){
       const recipesList = this.state.recipes.map((item)=>{
+        const recipeID = item._id
         const imgURL = `http://localhost:3000/${item.recipeImage}`
         return (
           <Grid item sm={6} xs={12} md={4} key={item._id}>
@@ -54,6 +67,10 @@ export default class extends Component {
                         More information
                       </Link>
                   </Button>
+
+                  <IconButton onClick={() => this.deleteButtonPressed(recipeID)}>
+                    <DeleteIcon/>
+                  </IconButton>
                 </CardActions>
               </Card>
             </Grid>

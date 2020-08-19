@@ -1,7 +1,7 @@
 import {ppaxios, paxios} from '../../utilities/axios' 
 
 
-export const showAll = async (email, password) => {
+export const showAlluser = async () => {
     try{
         const {data} = await paxios.get(
             "/api/recipes/showUserRecipes"
@@ -22,5 +22,16 @@ export const postNew = async (recipeFormData)=>{
         return data
     } catch (error) {
         throw error
+    }
+}
+
+export const deleteOne = async (recipeid) => {
+    try{
+        const {data} = await paxios.delete(
+            `/api/recipes/deleteRecipe/${recipeid}`
+        )
+        return data
+    }catch(error){
+        throw(error)
     }
 }
