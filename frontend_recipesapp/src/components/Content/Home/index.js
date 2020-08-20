@@ -3,6 +3,7 @@ import Page from '../../Page';
 import {showAll} from './actions'
 
 import {Grid , Card, Typography, Button, CardActions, CardActionArea, CardContent, CardMedia, Link} from '@material-ui/core'
+import {FaLongArrowAltDown} from 'react-icons/fa'
 
 
 
@@ -30,6 +31,25 @@ export default class extends Component {
 
 
     render(){
+      if(this.state.recipes){
+        return(
+          <Page
+          showHeader={true}
+          showFooter={true}
+          title={"RE-C-Ps"}
+          >
+            <Grid container justify="center" alignItems="center">
+              <Grid item xs={12} lg={6} style={{textAlign:"center"}}>
+                <Typography variant="h3">No one has posted a recipe yet...</Typography>
+                <br/><br/><br/><br/><br/><br/>
+                <Typography variant="h3">You can post your own in the profile tab below</Typography>
+                
+              </Grid>
+              <FaLongArrowAltDown size="5em"/>
+            </Grid>
+          </Page>
+        )
+      }
       const recipesList = this.state.recipes.map((item)=>{
         const imgURL = `http://localhost:3000/${item.recipeImage}`
         return (
