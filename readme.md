@@ -13,13 +13,6 @@
 -JSON Web Token
 
 
-## Instalation
-
-Backend
-```
-    cd backend_bahnka
-    npm install
-```
 
 
 
