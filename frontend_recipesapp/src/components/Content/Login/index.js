@@ -49,7 +49,7 @@ export default class extends Component {
 
     render(){
         if(this.state.redirectTo){
-            const url = (this.props.location.state) ? this.props.location.state.from.pathname : '/'
+            const url = '/profile'
             return (
                 <Redirect to={url}/>
             )

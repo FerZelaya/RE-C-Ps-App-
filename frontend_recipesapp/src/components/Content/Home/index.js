@@ -66,7 +66,24 @@ export default class extends Component {
         )
       })
 
-      if(this.state.noRecipes){
+      if(this.state.noRecipes === false){
+        return (
+          <Page
+            showHeader={true}
+            showFooter={true}
+            title={"RE-C-Ps"}
+          >
+            <Grid container spacing={2}>
+                {recipesList}
+            </Grid>
+
+
+          </Page>
+        )
+        
+      }
+        
+      
         return(
           <Page
           showHeader={true}
@@ -84,22 +101,7 @@ export default class extends Component {
             </Grid>
           </Page>
         )
-        
-      }else{
-        return (
-          <Page
-            showHeader={true}
-            showFooter={true}
-            title={"RE-C-Ps"}
-          >
-            <Grid container spacing={2}>
-                {recipesList}
-            </Grid>
-
-
-          </Page>
-        )
-      }
+      
     } 
       
       
