@@ -46,7 +46,7 @@ export default class extends Component {
     render(){
       const recipesList = this.state.recipes.map((item)=>{
         const recipeID = item._id
-        const imgURL = `http://localhost:3000/${item.recipeImage}`
+        const imgURL = `https://re-c-psappapi.herokuapp.com/${item.recipeImage}`
         return (
           <Grid item sm={6} xs={12} md={4} key={item._id}>
               <Card variant="outlined" style={{minWidth: 275,minHeight:450, padding:5, textAlign: 'center', alignItems:'center',justifyContent:'center', display:'flex',flexDirection:'column', backgroundColor:'#DCEDC8'}} >  

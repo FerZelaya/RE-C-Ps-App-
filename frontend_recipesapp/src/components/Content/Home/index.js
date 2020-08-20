@@ -12,7 +12,8 @@ export default class extends Component {
       super()
       
       this.state = {
-        recipes:[]
+        recipes:[],
+        noRecipes:true
       }
 
     }
@@ -20,9 +21,14 @@ export default class extends Component {
      async componentDidMount(){
         try {
           let result = await showAll()
-          this.setState({
-            recipes:result
-          })
+          if((result !== undefined || result.length !== 0)){
+            this.setState({
+              recipes:result,
+              noRecipes:false
+            })
+          }
+          
+          
         } catch (error) {
           console.log(error);
         }
@@ -31,27 +37,9 @@ export default class extends Component {
 
 
     render(){
-      if(this.state.recipes){
-        return(
-          <Page
-          showHeader={true}
-          showFooter={true}
-          title={"RE-C-Ps"}
-          >
-            <Grid container justify="center" alignItems="center">
-              <Grid item xs={12} lg={6} style={{textAlign:"center"}}>
-                <Typography variant="h3">No one has posted a recipe yet...</Typography>
-                <br/><br/><br/><br/><br/><br/>
-                <Typography variant="h3">You can post your own in the profile tab below</Typography>
-                
-              </Grid>
-              <FaLongArrowAltDown size="5em"/>
-            </Grid>
-          </Page>
-        )
-      }
+
       const recipesList = this.state.recipes.map((item)=>{
-        const imgURL = `http://localhost:3000/${item.recipeImage}`
+        const imgURL = `https://re-c-psappapi.herokuapp.com/${item.recipeImage}`
         return (
           <Grid item sm={6} xs={12} md={4} key={item._id}>
               <Card variant="outlined" style={{minWidth: 275,minHeight:450, padding:5, textAlign: 'center', alignItems:'center',justifyContent:'center', display:'flex',flexDirection:'column', backgroundColor:'#DCEDC8'}} >  
@@ -77,18 +65,42 @@ export default class extends Component {
             </Grid>
         )
       })
-      return (
-        <Page
+
+      if(this.state.noRecipes){
+        return(
+          <Page
           showHeader={true}
           showFooter={true}
           title={"RE-C-Ps"}
-        >
-          <Grid container spacing={2}>
-              {recipesList}
-          </Grid>
+          >
+            <Grid container justify="center" alignItems="center">
+              <Grid item xs={12} lg={6} style={{textAlign:"center"}}>
+                <Typography variant="h3">No one has posted a recipe yet...</Typography>
+                <br/><br/><br/><br/><br/><br/>
+                <Typography variant="h3">You can post your own in the profile tab below</Typography>
+                
+              </Grid>
+              <FaLongArrowAltDown size="5em"/>
+            </Grid>
+          </Page>
+        )
+        
+      }else{
+        return (
+          <Page
+            showHeader={true}
+            showFooter={true}
+            title={"RE-C-Ps"}
+          >
+            <Grid container spacing={2}>
+                {recipesList}
+            </Grid>
 
 
-        </Page>
-      )
-    }
-  }
+          </Page>
+        )
+      }
+    } 
+      
+      
+}

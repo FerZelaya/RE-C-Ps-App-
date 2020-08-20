@@ -3,7 +3,7 @@ import {naxios} from '../../utilities/axios'
 export const signUp = async (name,email, password) => {
     try{
         const {data} = await naxios.post(
-            "/api/sec/signup",
+            "https://re-c-psappapi.herokuapp.com/api/sec/signup",
             {
                 name:name,
                 email: email,

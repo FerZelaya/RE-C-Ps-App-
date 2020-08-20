@@ -4,7 +4,7 @@ import {ppaxios, paxios} from '../../utilities/axios'
 export const showAlluser = async () => {
     try{
         const {data} = await paxios.get(
-            "/api/recipes/showUserRecipes"
+            "https://re-c-psappapi.herokuapp.com/api/recipes/showUserRecipes"
         )
         return data
     }catch(error){
@@ -16,7 +16,7 @@ export const postNew = async (recipeFormData)=>{
     
     try {
         const {data} = await ppaxios.post(
-            "/api/recipes/postRecipe",
+            "https://re-c-psappapi.herokuapp.com/api/recipes/postRecipe",
             recipeFormData
         )
         return data
@@ -28,7 +28,7 @@ export const postNew = async (recipeFormData)=>{
 export const deleteOne = async (recipeid) => {
     try{
         const {data} = await paxios.delete(
-            `/api/recipes/deleteRecipe/${recipeid}`
+            `https://re-c-psappapi.herokuapp.com/api/recipes/deleteRecipe/${recipeid}`
         )
         return data
     }catch(error){

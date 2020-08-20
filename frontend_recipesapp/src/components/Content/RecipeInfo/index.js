@@ -34,7 +34,7 @@ export default class extends Component {
     render(){
         const {title,ingredients,preparation,servingSize,calories,recipeImage} = this.state.recipe
         const {name} = this.state.user
-        const imgURL = `http://localhost:3000/${recipeImage}`
+        const imgURL = `https://re-c-psappapi.herokuapp.com/${recipeImage}`
         return(
             <Page
                 showHeader={true}
