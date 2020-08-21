@@ -1,5 +1,5 @@
 # RecipesApp
-React Web App for posting own recipes ideas.
+React Web App for posting recipes ideas.
 Connects to backend_R-C-PsApp
 
 ## Developer
